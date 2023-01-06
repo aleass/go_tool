@@ -2,9 +2,11 @@ package main
 
 import (
 	"database/sql"
+	"embed"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"io"
 	"log"
 	"os"
 )
@@ -18,13 +20,20 @@ func init() {
 	getMysql()
 }
 
+//go:embed dsn
+var fs embed.FS
+
 /**
  * 获取 mysql 客户端
  */
 func getMysql() {
 	var err error
-	config, err := os.ReadFile("dsn") //数据库 dsn  server=xxxxx;user id=xx;password=xx;port=1433;database=xx;encrypt=disable
-	dsn := string(config)
+	read, err := fs.Open("dsn")
+	if err != nil {
+		panic(err.Error())
+	}
+	raw, _ := io.ReadAll(read)
+	dsn := string(raw)
 	w := log.New(os.Stdout, "\r\n", log.LstdFlags) // io writer（日志输出的目标，前缀和日志包含的内容——译者注）
 	newLogger := logger.New(
 		w,

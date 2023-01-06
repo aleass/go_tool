@@ -16,7 +16,7 @@ var user = "gua"
 var count int64
 
 func webServer() {
-	var t1 = template.New("a")
+	var t1 = template.New("html")
 	t1, err := t1.Parse(`<script type="text/javascript">window.open('','_self');window.close();</script>`)
 	if err != nil {
 		println(err)
@@ -27,7 +27,7 @@ func webServer() {
 			println(err)
 			return
 		}
-		t1.Execute(w, nil)
+		_ = t1.Execute(w, nil)
 		count, err = Drinking()
 		if err != nil {
 			println(err)
@@ -64,7 +64,7 @@ func drinkInit() {
 
 func main() {
 	println("enter默认gua，或 请输入用户名：")
-	fmt.Scanln(&user)
+	_, _ = fmt.Scanln(&user)
 	println("当前用户: " + user)
 	var c = make(chan os.Signal)
 	signal.Notify(c, syscall.SIGKILL, syscall.SIGHUP, syscall.SIGINT, syscall.SIGQUIT)
@@ -78,7 +78,7 @@ func main() {
 		select {
 		case <-c:
 			println("喝水量:" + strconv.Itoa(int(count)))
-			Db.Close()
+			_ = Db.Close()
 			os.Exit(1)
 		case <-t:
 			notification := toast.Notification{
