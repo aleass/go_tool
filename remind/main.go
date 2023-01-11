@@ -87,7 +87,7 @@ func main() {
 				Message: "喝水啦！！！当前喝水次数是：" + strconv.Itoa(int(count)),
 				Icon:    path, // 文件必须存在
 				Actions: []toast.Action{
-					{"protocol", "按钮1", "http://127.0.0.1:1111/"},
+					{"protocol", "吨吨吨", "http://127.0.0.1:1111/"},
 				},
 			}
 			err := notification.Push()
