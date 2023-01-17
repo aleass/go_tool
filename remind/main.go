@@ -32,7 +32,7 @@ func webServer() {
 		if err != nil {
 			println(err)
 		}
-		println(user + "已喝水: " + strconv.Itoa(int(count)))
+		println(user+"已喝水: "+strconv.Itoa(int(count)), time.Now().Format("2006/01/02 15:04:05"))
 	})
 	err = http.ListenAndServe(":1111", nil)
 	if err != nil {

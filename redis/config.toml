@@ -1,0 +1,6 @@
+# Redis配置
+[redis]
+host="192.168.11.60"
+port="6379"
+password="AaB123456./"
+db= 0
