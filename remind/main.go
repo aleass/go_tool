@@ -32,7 +32,7 @@ func webServer() {
 		if err != nil {
 			println(err)
 		}
-		println(user + "已喝水: " + strconv.Itoa(int(count)))
+		println(user+"已喝水: "+strconv.Itoa(int(count)), time.Now().Format("2006/01/02 15:04:05"))
 	})
 	err = http.ListenAndServe(":1111", nil)
 	if err != nil {
@@ -87,7 +87,7 @@ func main() {
 				Message: "喝水啦！！！当前喝水次数是：" + strconv.Itoa(int(count)),
 				Icon:    path, // 文件必须存在
 				Actions: []toast.Action{
-					{"protocol", "按钮1", "http://127.0.0.1:1111/"},
+					{"protocol", "吨吨吨", "http://127.0.0.1:1111/"},
 				},
 			}
 			err := notification.Push()
