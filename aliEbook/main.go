@@ -38,17 +38,19 @@ func main() {
 	for _, book := range books {
 		ali.bookMaps[book.Ebook] = struct{}{}
 	}
+	log.Println("任务启动，当前数量:" + strconv.Itoa(len(ali.bookMaps)))
 	for {
+		now := time.Now()
+		ali.tasks(now)
+		log.Println("执行完成 time:" + time.Now().Sub(now).String() + "  当前数量:" + strconv.Itoa(len(ali.bookMaps)))
 		time.Sleep(time.Hour)
-		ali.tasks()
-		log.Println("执行完成")
 	}
 }
 
-func (b *Books) tasks() {
+func (b *Books) tasks(now time.Time) {
 	b.finish = false
 	b.page = 0
-	b.dbCache.Time = time.Now().Format("2006-01-02 15:04:05")
+	b.dbCache.Time = now.Format("2006-01-02 15:04:05")
 
 	//1 page
 	_url := standUrl + strconv.Itoa(1)
