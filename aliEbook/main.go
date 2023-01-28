@@ -48,6 +48,7 @@ func main() {
 func (b *Books) tasks() {
 	b.finish = false
 	b.page = 0
+	b.dbCache.Time = time.Now().Format("2006-01-02 15:04:05")
 
 	//1 page
 	_url := standUrl + strconv.Itoa(1)
